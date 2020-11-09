@@ -20,55 +20,16 @@ def main():
     from src import travel
     from src import vrt_eta
     from src import team
+    from src import route
     
     # User input
 
     start_date = dt.datetime(2020,10,31)
     logbook = "log/rowing.log"
-    #tour="Hamburg_to_Copenhagen"
-    #tour="UK_Exeter-Stornoway-Exeter"
-    tour="Exmouth_to_La_Gomera"
 
-    if tour == "Exmouth_to_La_Gomera":
-        name_start = "Exmouth"
-        name_finish = "La Gomera"
-        ifile_kml = "routes/Exmouth_La_Gomera.kml"
-        xtick_inc_1 = 5
-        ytick_inc_1 = 5
-        extent_1 = [-20, 2.5, 25, 52.5]
-        lat_ext2 = 5.0
-        lon_ext2 = 5.0
-        coast_alpha = [0.7, 0.7]
-    elif tour == "UK_Exeter-Stornoway-Exeter":
-        name_start = "Topsham"
-        name_finish = "Turf via Stornoway"
-        ifile_kml="routes/UK_Exeter-Stornoway-Exeter.kml"
-        extent_1 = [-10.5, 2.5, 48, 60.5]
-        xtick_inc_1 = 5
-        ytick_inc_1 = 5
-        lat_ext2 = 3.0
-        lon_ext2 = 3.0
-        coast_alpha = [0.0, 0.7]
-    elif tour == "Hamburg_to_Copenhagen":
-        name_start = "Hamburg"
-        name_finish = "Copenhagen"
-        ifile_kml="routes/Hamburg_to_Copenhagen_1250_km.kml"
-        extent_1 = [6.5, 13.5, 52.5, 57.999]
-        lat_ext2 = 3.0
-        lon_ext2 = 3.0
-        xtick_inc_1 = 2
-        ytick_inc_1 = 2
-        coast_alpha = [0.7, 0.7]
-    else:
-        name_start = "???"
-        name_finish = "???"
-        ifile_kml="???.kml"
-        extent_1 = [None, None, None, None]
-        lat_ext2 = None
-        lon_ext2 = None
-        xtick_inc_1 = None
-        ytick_inc_1 = None
-        coast_alpha = [None, None]
+    #r=route(name="Hamburg_to_Copenhagen")
+    #r=route(name="UK_Exeter-Stornoway-Exeter")
+    r=route(name="Exmouth_to_La_Gomera")
 
     crews = []
     crews.append(team(config_file="rowing.conf"))
@@ -84,7 +45,7 @@ def main():
     date_2 = dt.datetime.strptime(final_date,'%Y-%m-%d') - dt.timedelta(days=1)
     d2 = dt.date.today()
     
-    lat_route, lon_route = kml2latlon(ifile_kml)
+    lat_route, lon_route = kml2latlon(r.ifile_kml)
     s2, last_date = read_logbook(logbook)
     lat_boat, lon_boat, s_nm1, s_end, res = travel(s2, lat_route, lon_route)
     s_dm1, _ = read_logbook(logbook, d1=date_2.strftime('%Y-%m-%d'), d2=final_date)
@@ -92,12 +53,12 @@ def main():
 
     # Plot data
     
-    xticks_1 = range(-180,180,xtick_inc_1)
-    yticks_1 = range(0,90,xtick_inc_1)
+    xticks_1 = range(-180,180,r.xtick_inc_1)
+    yticks_1 = range(0,90,r.ytick_inc_1)
 
     # ToDo: Test if this works for all possible lon/lat positions - possible not!
-    extent_2 = [math.floor(lon_boat)-0.5*lon_ext2, math.floor(lon_boat)+0.5*lon_ext2,
-                math.floor(lat_boat)-0.5*lat_ext2, math.floor(lat_boat)+0.5*lat_ext2]
+    extent_2 = [math.floor(lon_boat)-0.5*r.lon_ext2, math.floor(lon_boat)+0.5*r.lon_ext2,
+                math.floor(lat_boat)-0.5*r.lat_ext2, math.floor(lat_boat)+0.5*r.lat_ext2]
 
     xticks_2 = range(-180,180,1)
     yticks_2 = range(-90,90,1)
@@ -106,7 +67,7 @@ def main():
 
     fig = plt.figure(figsize=(16, 9))
 
-    fig.suptitle(name_start + ' to ' + name_finish
+    fig.suptitle(r.name_start + ' to ' + r.name_finish
                  + ' ({:.0f} km)'.format(s_end/1000.) + ' \n'
                  + start_date.strftime("%Y-%m-%d") + ' - '
                  + last_date.strftime("%Y-%m-%d") )
@@ -120,10 +81,10 @@ def main():
     ax1 = fig.add_subplot(1, 2, 1, projection=proj)
 
     ax1.add_feature(land_10m)
-    ax1.coastlines(resolution='10m', color='gray', alpha=coast_alpha[0])
+    ax1.coastlines(resolution='10m', color='gray', alpha=r.coast_alpha[0])
     ax1.set_xticks(xticks_1)
     ax1.set_yticks(yticks_1)
-    ax1.set_extent(extent_1, crs=proj)
+    ax1.set_extent(r.extent_1, crs=proj)
     ax1.xaxis.set_major_formatter(lon_formatter)
     ax1.yaxis.set_major_formatter(lat_formatter)
 
@@ -134,7 +95,7 @@ def main():
     ax1.plot(lon_route, lat_route, ':', linewidth=2, transform=proj)
     ax1.plot(lon_boat, lat_boat, marker='o', color='red',
              markersize=8, alpha=0.7, transform=proj)
-    ax1.set_title('Distance from ' + name_start + ': '
+    ax1.set_title('Distance from ' + r.name_start + ': '
                   + '{:.0f} km \n'.format((s_nm1+res)/1000.)
                   + 'Estimated time of arrival: '
                   + eta.strftime('%a %d %b %Y %H:%M'))
@@ -142,7 +103,7 @@ def main():
     ax2 = fig.add_subplot(1, 2, 2, projection=proj)
 
     ax2.add_feature(land_10m)
-    ax2.coastlines(resolution='10m',color='gray', alpha=coast_alpha[1])
+    ax2.coastlines(resolution='10m',color='gray', alpha=r.coast_alpha[1])
     ax2.set_xticks(xticks_2)
     ax2.set_yticks(yticks_2)
     ax2.set_extent(extent_2)
