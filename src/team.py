@@ -16,6 +16,13 @@ class team:
         self.members="NN"
         self.name="NN"
 
+        # default position Beach Pub Exmouth
+        self.lat = 50.61699
+        self.lon = -3.422901
+        
+        self.s = 0.0 # traveled to last way point
+        self.res = 0.0 # traveled distance after
+
         # read config file
         config = configparser.ConfigParser()
         config.read("conf/" + config_file)

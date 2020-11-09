@@ -41,12 +41,22 @@ def main():
 
     # Read and calculate data
 
-    final_date = dt.date.today().strftime("%Y-%m-%d")
-    date_2 = dt.datetime.strptime(final_date,'%Y-%m-%d') - dt.timedelta(days=1)
-    d2 = dt.date.today()
+    crew = crews[0]
+
+    for crew in crews:
+        final_date = dt.date.today().strftime("%Y-%m-%d")
+        date_2 = dt.datetime.strptime(final_date,'%Y-%m-%d') - dt.timedelta(days=1)
+        d2 = dt.date.today()
     
-    lat_route, lon_route = kml2latlon(r.ifile_kml)
-    s2, last_date = read_logbook(logbook)
+        crew.lat_route, crew.lon_route = kml2latlon(r.ifile_kml)
+
+    
+        s2, last_date = read_logbook("log/" + crew.logbook)
+
+    
+        print(s2)
+    sys.exit()
+
     lat_boat, lon_boat, s_nm1, s_end, res = travel(s2, lat_route, lon_route)
     s_dm1, _ = read_logbook(logbook, d1=date_2.strftime('%Y-%m-%d'), d2=final_date)
     eta = vrt_eta(t1=start_date, t2=last_date, s2=s2, s3=s_end)
@@ -121,8 +131,8 @@ def main():
     ax2.set_title('Distance ' + d2.strftime("%a %d %b %Y") + ": " +
                   '{:.0f} km'.format(s_dm1/1000.))
 
-    # plt.show()
-    plt.savefig("plots/Exmouth_RC_virtual_row_winter_2020--2021.png")
+    plt.show()
+    #plt.savefig("plots/Exmouth_RC_virtual_row_winter_2020--2021.png")
 
 
 if __name__ == "__main__":
