@@ -20,8 +20,9 @@ class team:
         self.lat = 50.61699
         self.lon = -3.422901
         
-        self.s = 0.0 # traveled to last way point
-        self.res = 0.0 # traveled distance after
+        self.s = 0.0     # distance traveled to last way point
+        self.res = 0.0   # distance traveled beyond last way point
+        self.s_end = 0.0 # distance from start to finish
 
         # read config file
         config = configparser.ConfigParser()
