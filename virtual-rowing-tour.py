@@ -31,7 +31,7 @@ def main():
     # ToDo allow team specific routes
     #r=route(name="Hamburg_to_Copenhagen")
     #r=route(name="UK_Exeter-Stornoway-Exeter")
-    #r=route(name="Exmouth_to_La_Gomera")
+    r=route(name="Exmouth_to_La_Gomera")
 
     # Uncomment 1-2 teams to select plotted crew
     crews = []
