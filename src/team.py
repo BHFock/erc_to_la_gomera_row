@@ -16,6 +16,18 @@ class team:
         self.members="NN"
         self.name="NN"
 
+        # default position Beach Pub Exmouth
+        self.lat = 50.61699
+        self.lon = -3.422901
+
+        self.s = 0.0     # distance traveled so far
+        self.sdm1 = 0.0  # distance traveled after date_2 # ToDo organise as vector for all days
+        self.sw = 0.0    # distance traveled to last way point
+        self.res = 0.0   # distance traveled beyond last way point
+        self.s_end = 0.0 # distance from start to finish
+
+        self.date_last_log = "1517-10-31" # Martin Luther posts his 95 Theses
+
         # read config file
         config = configparser.ConfigParser()
         config.read("conf/" + config_file)

@@ -36,13 +36,13 @@ def travel(distance, lat_route, lon_route):
     return lat_pos, lon_pos, s_sum[n-1], s_sum[-1], res
 
 
-def vrt_eta(t1=None, t2=None, s2=None, s3=None):
+def vrt_eta(t1=None, t2=None, s1=None, s2=None, s3=None):
     "Estimate arrival time"
 
     import datetime as dt
 
     t12 = (t2-t1).total_seconds()
-    v12 = s2 / t12
+    v12 = (s2-s1) / t12
 
     # Assume to continue travel with average velocity
     v23 = v12
