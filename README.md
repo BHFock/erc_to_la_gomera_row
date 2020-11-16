@@ -1,17 +1,19 @@
-# ERC to La Gomera Row
+# Virtual Rowing Tour
 
-# km log 
+![plot](plots/Exmouth_RC_virtual_row_winter_2020--2021.png)
 
-https://github.com/BHFock/erc_to_la_gomera_row/blob/main/log/rowing.log
+## Logbook 
 
-* Add meters via the group name "The Nameless Viking Crew" for all rowers who are not choosing to log as individuals 
-* Add meters for individuals using their "rower names" (real name or pseudonym) for all rowers who choose to do so
+The [log book](https://github.com/BHFock/erc_to_la_gomera_row/blob/main/log/rowing.log) serves as input for the rowed meters.
 
-# Software installation
+## Software installation
 
-Software requirements availble from 
-https://www.anaconda.com
+The required Python packages can be installed via https://www.anaconda.com
 
-conda install -c conda-forge cartopy
-conda install -c conda-forge fastkml
-conda install -c conda-forge geopy
+ conda install -c conda-forge iris
+
+ conda install -c conda-forge iris-grib
+
+ conda install -c conda-forge geopy
+
+ conda install -c conda-forge fastkml
