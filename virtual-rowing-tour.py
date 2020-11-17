@@ -19,7 +19,7 @@ def main():
     from vrt import kml2latlon
     from vrt import read_logbook
     from vrt import travel
-    from vrt import vrt_eta
+    from vrt import eta
     from vrt import team
     from vrt import route
 
@@ -49,8 +49,8 @@ def main():
         crew.s, crew.date_last_log = read_logbook("log/" + crew.logbook)
         crew.lat, crew.lon, crew.sw, crew.s_end, crew.res = travel(crew.s, crew.lat_route, crew.lon_route)
         crew.sdm1, _ = read_logbook("log/" + crew.logbook, d1=date_2.strftime('%Y-%m-%d'), d2=final_date)
-        crew.eta = vrt_eta(t1=start_date, t2=crew.date_last_log,
-                           s1=0.0, s2=crew.s, s3=crew.s_end)
+        crew.eta = eta(t1=start_date, t2=crew.date_last_log,
+                       s1=0.0, s2=crew.s, s3=crew.s_end)
 
     # Plot data
 
