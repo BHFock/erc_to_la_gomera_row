@@ -26,7 +26,6 @@ def main():
     # User input
 
     start_date = dt.datetime(2020,10,31)
-    logbook = "log/rowing.log"
 
     # ToDo allow team specific routes
     #r=route(name="Hamburg_to_Copenhagen")
