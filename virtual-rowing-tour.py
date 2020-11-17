@@ -104,10 +104,18 @@ def main():
                    markersize=8, alpha=0.7, transform=proj)
         i=i+1
 
-    ax1.set_title('Distance from ' + r.name_start + ': '
-                  + '{:.0f} km \n'.format((crews[0].s)/1000.)
-                  + 'Estimated time of arrival: '
-                  + crews[0].eta.strftime('%a %d %b %Y %H:%M'))
+    if (len(crews)==1):
+        ax1.set_title('Distance from ' + r.name_start + ': '
+                      + '{:.0f} km \n'.format((crews[0].s)/1000.)
+                      + 'Estimated time of arrival: '
+                      + crews[0].eta.strftime('%a %d %b %Y %H:%M'))
+    if (len(crews)==2):
+        ax1.set_title('Distance from ' + r.name_start + ': '
+                      + '{:.0f} km '.format((crews[0].s)/1000.)
+                      + '({:.0f} km) \n'.format((crews[1].s)/1000.)
+                      + 'Estimated time of arrival: '
+                      + crews[0].eta.strftime(' %d %b %H:%M')
+                      + crews[1].eta.strftime(' (%d %b %H:%M)'))
 
     ax2 = fig.add_subplot(0+len(crews), 2, 2, projection=proj)
     ax2.add_feature(land_10m)
