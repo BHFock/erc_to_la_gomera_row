@@ -14,14 +14,14 @@ def main():
     import iris
     import iris.plot as iplt
 
-    sys.path.append(sys.path[0] + "/src")
+    sys.path.append(sys.path[0] + "/vrt")
 
-    from src import kml2latlon
-    from src import read_logbook
-    from src import travel
-    from src import vrt_eta
-    from src import team
-    from src import route
+    from vrt import kml2latlon
+    from vrt import read_logbook
+    from vrt import travel
+    from vrt import vrt_eta
+    from vrt import team
+    from vrt import route
 
     # User input
 
