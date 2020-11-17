@@ -23,12 +23,18 @@ def travel(distance, lat_route, lon_route):
     # traveled  beyond last resolved waypoint
     lat_pos = lat_route[0]
     lon_pos = lon_route[0]
+    res = 0.0
     for n in range(len(s_sum)):
         if s_sum[n] > distance:
             lat_pos = lat_route[n-1]
             lon_pos = lon_route[n-1]
             res = distance - s_sum[n-1]
             break
+
+    if  distance > s_sum[n]:
+        lat_pos = lat_route[n]
+        lon_pos = lon_route[n]
+        res = 0
 
     # ToDo: Correct position by travelling the distance res
     #       from the last know position (lat_pos, lon_pps)
