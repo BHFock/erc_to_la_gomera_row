@@ -16,6 +16,16 @@ class route:
             self.lat_ext2 = 5.0
             self.lon_ext2 = 5.0
             self.coast_alpha = [0.7, 0.7]
+        elif name == "land_route":
+            self.name_start = "Exmouth"
+            self.name_finish = "Africa"
+            self.ifile_kml = "routes/land_crew.kml"
+            self.xtick_inc_1 = 5
+            self.ytick_inc_1 = 5
+            self.extent_1 = [-20, 2.5, 25, 52.5]
+            self.lat_ext2 = 5.0
+            self.lon_ext2 = 5.0
+            self.coast_alpha = [0.7, 0.7]
         elif name == "UK_Exeter-Stornoway-Exeter":
             self.name_start = "Topsham"
             self.name_finish = "Turf via Stornoway"

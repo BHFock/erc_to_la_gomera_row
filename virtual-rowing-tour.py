@@ -31,6 +31,7 @@ def main():
     # r = route(name="Hamburg_to_Copenhagen")
     # r = route(name="UK_Exeter-Stornoway-Exeter")
     r = route(name="Exmouth_to_La_Gomera")
+    rl = route(name="land_route")
 
     # Uncomment 1-2 teams to select plotted crew
     crews = []
