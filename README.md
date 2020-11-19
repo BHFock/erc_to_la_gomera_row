@@ -4,7 +4,7 @@
 
 ## Logbook 
 
-The [log book](https://github.com/BHFock/erc_to_la_gomera_row/blob/main/log/rowing.log) serves as input for the rowed meters.
+The [rowing_log.csv](https://github.com/BHFock/virtual-rowing-tour/blob/main/log/rowing_log.csv) serves as input for the rowed meters.
 
 ## Software installation
 
