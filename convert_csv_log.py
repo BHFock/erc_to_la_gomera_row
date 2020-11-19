@@ -21,4 +21,4 @@ log_data.rename(columns={'Date':'date'}, inplace=True)
 log_data.rename(columns={'Meters':'meter'}, inplace=True)
 log_data.rename(columns={'Name':'name'}, inplace=True)
 
-log_data.to_csv(log_path, index=False, sep=';')
+log_data.to_csv(log_path, index=False, sep=',')
