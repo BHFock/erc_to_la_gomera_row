@@ -11,7 +11,7 @@ def convert_date(date_str):
 
 
 csv_path = 'log/ERC land crew log - Sheet1.csv'
-log_path = 'log/land_crew.log'
+log_path = 'log/land_crew_log.csv'
 
 all_data = pd.read_csv(csv_path)
 log_data = all_data.iloc[:, 0:3]
