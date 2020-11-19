@@ -6,7 +6,7 @@ def read_logbook(ifile, d1=None, d2=None):
     import pandas
     import datetime as dt
 
-    df = pandas.read_csv(ifile, sep=' *; *', engine='python')
+    df = pandas.read_csv(ifile, sep=' *, *', engine='python')
     pandas.to_datetime(df['date'])
     if d1 is not None and d2 is not None:
         df = df.loc[(df['date'] > d1) & (df['date'] <= d2)]
