@@ -33,6 +33,19 @@ def main():
     r = route(name="Exmouth_to_La_Gomera")
     rl = route(name="land_route")
 
+    wx = False
+
+    if wx:
+        gribfile='tmp/o.grib2'
+        cs = iris.Constraint()
+        cs = cs & iris.Constraint(name = 'air_pressure_at_sea_level')
+        cs = cs & iris.Constraint(latitude = lambda lat: r.extent_1[0] <= lat <= r.extent_1[3])
+        cs = cs & iris.Constraint(longitude = lambda lon: r.extent_1[1] <= lon <= r.extent_1[2])
+        c = iris.load(gribfile, cs)
+        # iplt.contour(c[0], cmap='RdYlBu_r')
+        # iplt.show()
+        # print(c)
+
     # Uncomment 1-2 teams to select plotted crew
     crews = []
     crews.append(team(config_file="rowing.conf"))
